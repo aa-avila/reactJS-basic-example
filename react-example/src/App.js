@@ -1,12 +1,12 @@
 import './App.css';
 
-function formatName(user){
+function formatName(user) {
   if (user) {
     return user.name + " " + user.lastname;
   }
 }
 
-function saludo(user){
+function saludo(user) {
   if (user) {
     return <p>Hola, {formatName(user)}!</p>;
   }
@@ -23,14 +23,28 @@ const persona_2 = {
   lastname: "Perez"
 }
 
-const element = <p>Este elemento esta en una variable</p>;
+const elementSimple = <p>Este parrafo esta en una variable</p>;
+
+const elementComplex = (
+  <div>
+    <h2>Elemento compuesto</h2>
+    <p>Este elemento esta conformado por varias etiquetas dentro de un div</p>
+    <p>Otro parrafo</p>
+    <p>Oooootro parrafo</p>
+
+  </div>
+)
 
 function App() {
   return (
     <div className="App">
-      {saludo(persona_1)}
-      {saludo(persona_2)}
-      {element}
+      <div>
+        {saludo(persona_1)}
+        {saludo(persona_2)}
+      </div>
+      {elementSimple}
+      {elementComplex}
+
     </div>
   );
 }
