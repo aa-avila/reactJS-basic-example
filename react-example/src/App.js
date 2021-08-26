@@ -1,10 +1,9 @@
+import React from 'react';
 import './App.css';
 
 // Funcion que devuelve nombre + apellido a partir de un objeto
 function formatName(user) {
-  if (user) {
     return user.name + " " + user.lastname;
-  }
 }
 
 // Funcion que retorna un <p> con saludo usando formatName
@@ -40,6 +39,29 @@ const elementComplex = (
   </div>
 )
 
+// Componente (funcion)
+function Animal(props) {
+  return (
+    <div className="componente">
+      <h3>Componente (funcion)</h3>
+      <p>Tu animal favorito es: {props.animal}</p>
+    </div>
+  )
+}
+
+//Componente (clase)
+class Comida extends React.Component {
+  render() {
+    return (
+      <div className="componente">
+        <h3>Componente (clase)</h3>
+        <p>Tu comida favorita es: {this.props.comida}</p>
+      </div>
+    )
+  }
+}
+
+
 // APP
 function App() {
   return (
@@ -47,9 +69,17 @@ function App() {
       <div>
         {saludo(persona_1)}
         {saludo(persona_2)}
+        {saludo()}
       </div>
+
       {elementSimple}
       {elementComplex}
+
+    <div>
+      <Animal animal="perro" />
+      <Comida comida="milanesa" />
+
+    </div>
 
     </div>
   );
