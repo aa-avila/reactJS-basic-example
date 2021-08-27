@@ -3,7 +3,7 @@ import './App.css';
 
 // Funcion que devuelve nombre + apellido a partir de un objeto
 function formatName(user) {
-    return user.name + " " + user.lastname;
+  return user.name + " " + user.lastname;
 }
 
 // Funcion que retorna un <p> con saludo usando formatName
@@ -61,6 +61,40 @@ class Comida extends React.Component {
   }
 }
 
+// CLOCK (componente Class con State y Lifecycle methods)
+class Clock extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { date: new Date() };
+  }
+
+  // crea intervalo al montar componente, el cual ejecuta funcion tick() cada 1 segundo
+  componentDidMount() {
+    this.timerID = setInterval(this.tick, 1000);
+  }
+
+  // al desmontar componente elimina el intervalo mediante el timerID
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
+  // funcion "tick" que actualiza el state "date"
+  tick = () => {
+    this.setState({
+      date: new Date()
+    });
+  }
+
+  render() {
+    return (
+      <div className="componente">
+        <h2>Hora local</h2>
+        <h3>Son las {this.state.date.toLocaleTimeString()}.</h3>
+      </div>
+    );
+  }
+}
+
 
 // APP
 function App() {
@@ -75,11 +109,14 @@ function App() {
       {elementSimple}
       {elementComplex}
 
-    <div>
-      <Animal animal="perro" />
-      <Comida comida="milanesa" />
+      <div>
+        <Animal animal="perro" />
+        <Comida comida="milanesa" />
+      </div>
 
-    </div>
+      <div>
+        <Clock />
+      </div>
 
     </div>
   );
