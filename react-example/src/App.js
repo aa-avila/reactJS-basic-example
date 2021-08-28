@@ -101,6 +101,55 @@ class Clock extends React.Component {
 }
 
 /***************************************************************** */
+//TOGGLE ON/OFF (Class component, con state & prevState)
+class ToggleButton extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {isToggled: true};
+
+    //Binding
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.setState( prevSate =>  ({ isToggled: !prevSate.isToggled }));
+  }
+
+  render() {
+    return (
+      <button onClick={this.handleClick}>
+        {this.state.isToggled ? 'ON' : 'OFF'}
+      </button>
+    );
+  }
+}
+
+/***************************************************************** */
+//TOGGLE ON/OFF ("sin bind")
+class ToggleBtnNoBind extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {isToggled: true};
+  }
+
+  handleClick = () => {
+    this.setState( prevSate =>  ({ isToggled: !prevSate.isToggled }));
+  }
+
+  render() {
+    return (
+      <button onClick={this.handleClick}>
+        {this.state.isToggled ? 'ON' : 'OFF'}
+      </button>
+    );
+  }
+}
+
+
+
+
+
+/***************************************************************** */
 // APP A RENDERIZAR
 function App() {
   return (
@@ -110,7 +159,6 @@ function App() {
         {elementSimple}
         {elementComplex}
       </div>
-
 
       <div>
         {saludo(persona_1)}
@@ -125,6 +173,20 @@ function App() {
 
       <div>
         <Clock />
+      </div>
+
+      <div>
+        <h3>Toggle (con this.handleClick.bind)</h3>
+        <ToggleButton />
+        <ToggleButton />
+        <ToggleButton />
+      </div>
+
+      <div>
+      <h3>Toggle (sin this.handleClick.bind)</h3>
+        <ToggleBtnNoBind />
+        <ToggleBtnNoBind />
+        <ToggleBtnNoBind />
       </div>
 
     </div>
