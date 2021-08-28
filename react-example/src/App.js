@@ -1,6 +1,21 @@
 import React from 'react';
 import './App.css';
 
+/***************************************************************** */
+// Variable que contiene un unico elemento <p>
+const elementSimple = <p>Elemento simple. Este parrafo esta en una variable</p>;
+
+// variable que contiene varios elementos dentro de un unico elemento <div>
+const elementComplex = (
+  <div>
+    <h3>Elemento compuesto</h3>
+    <p>Este elemento esta conformado por varias etiquetas dentro de un div</p>
+    <p>Otro parrafo</p>
+    <p>Oooootro parrafo</p>
+  </div>
+);
+
+/***************************************************************** */
 // Funcion que devuelve nombre + apellido a partir de un objeto
 function formatName(user) {
   return user.name + " " + user.lastname;
@@ -26,19 +41,7 @@ const persona_2 = {
   lastname: "Perez"
 }
 
-// Variable que contiene un unico elemento <p>
-const elementSimple = <p>Este parrafo esta en una variable</p>;
-
-// variable que contiene varios elementos dentro de un unico elemento <div>
-const elementComplex = (
-  <div>
-    <h2>Elemento compuesto</h2>
-    <p>Este elemento esta conformado por varias etiquetas dentro de un div</p>
-    <p>Otro parrafo</p>
-    <p>Oooootro parrafo</p>
-  </div>
-)
-
+/***************************************************************** */
 // Componente (funcion)
 function Animal(props) {
   return (
@@ -46,9 +49,10 @@ function Animal(props) {
       <h3>Componente (funcion)</h3>
       <p>Tu animal favorito es: {props.animal}</p>
     </div>
-  )
+  );
 }
 
+/***************************************************************** */
 //Componente (clase)
 class Comida extends React.Component {
   render() {
@@ -61,6 +65,7 @@ class Comida extends React.Component {
   }
 }
 
+/***************************************************************** */
 // CLOCK (componente Class con State y Lifecycle methods)
 class Clock extends React.Component {
   constructor(props) {
@@ -95,19 +100,23 @@ class Clock extends React.Component {
   }
 }
 
-
-// APP
+/***************************************************************** */
+// APP A RENDERIZAR
 function App() {
   return (
     <div className="App">
+
+      <div>
+        {elementSimple}
+        {elementComplex}
+      </div>
+
+
       <div>
         {saludo(persona_1)}
         {saludo(persona_2)}
         {saludo()}
       </div>
-
-      {elementSimple}
-      {elementComplex}
 
       <div>
         <Animal animal="perro" />
