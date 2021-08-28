@@ -105,14 +105,14 @@ class Clock extends React.Component {
 class ToggleButton extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {isToggled: true};
+    this.state = { isToggled: true };
 
     //Binding
     this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick() {
-    this.setState( prevSate =>  ({ isToggled: !prevSate.isToggled }));
+    this.setState(prevSate => ({ isToggled: !prevSate.isToggled }));
   }
 
   render() {
@@ -129,11 +129,11 @@ class ToggleButton extends React.Component {
 class ToggleBtnNoBind extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {isToggled: true};
+    this.state = { isToggled: true };
   }
 
   handleClick = () => {
-    this.setState( prevSate =>  ({ isToggled: !prevSate.isToggled }));
+    this.setState(prevSate => ({ isToggled: !prevSate.isToggled }));
   }
 
   render() {
@@ -143,6 +143,76 @@ class ToggleBtnNoBind extends React.Component {
       </button>
     );
   }
+}
+
+/***************************************************************** */
+//CONDITIONAL RENDERING (según state)
+function LoggedInMsg(props) {
+  return <h3>Estás logueado!</h3>
+}
+
+function LoggedOutMsg(props) {
+  return <h3>No estás logueado.</h3>
+}
+
+function MsgLoginControl(props) {
+  const isLogged = props.isLogged;
+  return (
+    isLogged ? <LoggedInMsg /> : <LoggedOutMsg />
+  );
+}
+
+function LoginButton(props) {
+  return (
+    <button onClick={props.onClick}>
+      Loguearse
+    </button>
+  );
+}
+
+function LogoutButton(props) {
+  return (
+    <button onClick={props.onClick}>
+      Salir
+    </button>
+  );
+}
+
+class LoginControl extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleLogin = this.handleLogin.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
+    this.state = { isLogged: false };
+  }
+
+  handleLogin() {
+    this.setState({ isLogged: true });
+  }
+
+  handleLogout() {
+    this.setState({ isLogged: false });
+  }
+
+  render() {
+    const isLogged = this.state.isLogged;
+    let button;
+    if (isLogged){
+      button = <LogoutButton onClick={this.handleLogout} />;
+    } else {
+      button = <LoginButton onClick={this.handleLogin} />;
+    }
+
+    return (
+      <div>
+        <h2>Login Control</h2>
+        <MsgLoginControl isLogged={isLogged}/>
+        {button}
+      </div>
+
+    );
+  }
+
 }
 
 
@@ -183,10 +253,14 @@ function App() {
       </div>
 
       <div>
-      <h3>Toggle (sin this.handleClick.bind)</h3>
+        <h3>Toggle (sin this.handleClick.bind)</h3>
         <ToggleBtnNoBind />
         <ToggleBtnNoBind />
         <ToggleBtnNoBind />
+      </div>
+
+      <div>
+        <LoginControl />
       </div>
 
     </div>
