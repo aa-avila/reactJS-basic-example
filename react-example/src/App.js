@@ -197,7 +197,7 @@ class LoginControl extends React.Component {
   render() {
     const isLogged = this.state.isLogged;
     let button;
-    if (isLogged){
+    if (isLogged) {
       button = <LogoutButton onClick={this.handleLogout} />;
     } else {
       button = <LoginButton onClick={this.handleLogin} />;
@@ -206,7 +206,7 @@ class LoginControl extends React.Component {
     return (
       <div>
         <h2>Login Control</h2>
-        <MsgLoginControl isLogged={isLogged}/>
+        <MsgLoginControl isLogged={isLogged} />
         {button}
       </div>
 
@@ -229,7 +229,7 @@ const todos = [
   },
   {
     id: 'zxcvbn',
-    text: 'regar las plantas' 
+    text: 'regar las plantas'
   }
 ]
 
@@ -251,6 +251,41 @@ function TodoList(props) {
     </ul>
   )
 }
+
+/***************************************************************** */
+/** CONTROLLED COMPONENTS */
+// Formulario basico
+class NameForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { value: '' };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({ value: event.target.value });
+  }
+
+  handleSubmit(event) {
+    alert('El nombre ingresado es: ' + this.state.value);
+    event.preventDefault();
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          Nombre:
+          <input type="text" value={this.state.value} onChange={this.handleChange} />
+        </label>
+        <input type="submit" value="Enviar" />
+      </form>
+    )
+  }
+}
+
 
 
 
@@ -301,6 +336,16 @@ function App() {
       <div>
         <h3>ToDo (ejemplo de lista)</h3>
         <TodoList todoData={todos} />
+      </div>
+
+      <div>
+        <h2>Controlled components</h2>
+        <div>
+          <h3>Formulario basico</h3>
+          <NameForm />
+
+        </div>
+
       </div>
 
     </div>
