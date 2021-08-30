@@ -215,7 +215,42 @@ class LoginControl extends React.Component {
 
 }
 
+/***************************************************************** */
+//LIST ITEMS
+//todo data de ejemplo
+const todos = [
+  {
+    id: 'qwerty',
+    text: 'programar'
+  },
+  {
+    id: 'asdfgh',
+    text: 'lavar los platos'
+  },
+  {
+    id: 'zxcvbn',
+    text: 'regar las plantas' 
+  }
+]
 
+//un item
+function ListItem(props) {
+  return <li>{props.text}</li>;
+}
+
+//lista (usa id como key)
+function TodoList(props) {
+  const todoData = props.todoData;
+  const listItems = todoData.map((todo) => {
+    return <ListItem key={todo.id.toString()} text={todo.text} />
+  });
+
+  return (
+    <ul>
+      {listItems}
+    </ul>
+  )
+}
 
 
 
@@ -261,6 +296,11 @@ function App() {
 
       <div>
         <LoginControl />
+      </div>
+
+      <div>
+        <h3>ToDo (ejemplo de lista)</h3>
+        <TodoList todoData={todos} />
       </div>
 
     </div>
