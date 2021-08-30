@@ -254,7 +254,7 @@ function TodoList(props) {
 
 /***************************************************************** */
 /** CONTROLLED COMPONENTS */
-
+//--------------------------
 // Formulario basico
 class NameForm extends React.Component {
   constructor(props) {
@@ -287,6 +287,7 @@ class NameForm extends React.Component {
   }
 }
 
+//--------------------------
 // Text area
 class TextForm extends React.Component {
   constructor(props) {
@@ -319,6 +320,7 @@ class TextForm extends React.Component {
   }
 }
 
+//--------------------------
 // Select form
 class SelectForm extends React.Component {
   constructor(props) {
@@ -347,7 +349,7 @@ class SelectForm extends React.Component {
             <option value="panchos">Panchos</option>
             <option value="asado">Asado</option>
             <option value="lasagna">Lasagna</option>
-            <option value="tarta de verduras">Tarta de verduras</option> 
+            <option value="tarta de verduras">Tarta de verduras</option>
           </select>
         </label>
         <input type="submit" value="Enviar" />
@@ -356,7 +358,104 @@ class SelectForm extends React.Component {
   }
 }
 
+//--------------------------
+// Multiple inputs
+class SubscriptionForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: '',
+      lastname: '',
+      gender: 'female',
+      age: '',
+      acceptTerms: false
+    };
 
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+  }
+
+  handleSubmit(event) {
+    const { name, lastname, gender, age, acceptTerms } = this.state;
+    const formData = {
+      name: name,
+      lastname: lastname,
+      gender: gender,
+      age: age,
+      acceptTerms: acceptTerms
+    }
+
+    const formJson = JSON.stringify(formData);
+
+    alert('Los siguientes datos han sido enviados: ' + formJson);
+    event.preventDefault();
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          Nombre:
+          <input
+            name="name"
+            type="text"
+            value={this.state.name}
+            onChange={this.handleInputChange} />
+        </label>
+        <br />
+        <label>
+          Apellido:
+          <input
+            name="lastname"
+            type="text"
+            value={this.state.lastname}
+            onChange={this.handleInputChange} />
+        </label>
+        <br />
+        <label>
+          Edad:
+          <input
+            name="age"
+            type="text"
+            value={this.state.age}
+            onChange={this.handleInputChange} />
+        </label>
+        <br />
+        <label>
+          Genero:
+          <select name="gender" value={this.state.gender} onChange={this.handleInputChange} >
+            <option value="male">Masculino</option>
+            <option value="female">Femenino</option>
+            <option value="non-binary">No binario</option>
+            <option value="other">Otro</option>
+            <option value="not-spec">Prefiero no decirlo</option>
+          </select>
+        </label>
+        <br />
+        <label>
+          Acepto los terminos de la suscripcion
+          <input
+            name="acceptTerms"
+            type="checkbox"
+            checked={this.state.acceptTerms}
+            onChange={this.handleInputChange} />
+        </label>
+        <br />
+        <input type="submit" value="Enviar" />
+      </form >
+    );
+  }
+}
 
 
 
@@ -423,6 +522,10 @@ function App() {
         <div>
           <h3>Select</h3>
           <SelectForm />
+        </div>
+        <div>
+          <h3>Multiple Inputs</h3>
+          <SubscriptionForm />
         </div>
 
 
