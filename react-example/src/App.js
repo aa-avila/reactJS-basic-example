@@ -254,6 +254,7 @@ function TodoList(props) {
 
 /***************************************************************** */
 /** CONTROLLED COMPONENTS */
+
 // Formulario basico
 class NameForm extends React.Component {
   constructor(props) {
@@ -279,6 +280,38 @@ class NameForm extends React.Component {
         <label>
           Nombre:
           <input type="text" value={this.state.value} onChange={this.handleChange} />
+        </label>
+        <input type="submit" value="Enviar" />
+      </form>
+    )
+  }
+}
+
+// Text area
+class TextForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { value: 'Escriba una anecdota en este campo.' };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({ value: event.target.value });
+  }
+
+  handleSubmit(event) {
+    alert('El texto ingresado es: ' + this.state.value);
+    event.preventDefault();
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          Anecdota o historia graciosa:
+          <textarea value={this.state.value} onChange={this.handleChange} />
         </label>
         <input type="submit" value="Enviar" />
       </form>
@@ -343,8 +376,12 @@ function App() {
         <div>
           <h3>Formulario basico</h3>
           <NameForm />
-
         </div>
+        <div>
+          <h3>Textarea</h3>
+          <TextForm />
+        </div>
+
 
       </div>
 
