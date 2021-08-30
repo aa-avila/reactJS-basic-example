@@ -319,6 +319,45 @@ class TextForm extends React.Component {
   }
 }
 
+// Select form
+class SelectForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { value: 'lasagna' };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({ value: event.target.value });
+  }
+
+  handleSubmit(event) {
+    alert('Tu comida favorita es: ' + this.state.value);
+    event.preventDefault();
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          Elije tu comida preferida:
+          <select value={this.state.value} onChange={this.handleChange} >
+            <option value="panchos">Panchos</option>
+            <option value="asado">Asado</option>
+            <option value="lasagna">Lasagna</option>
+            <option value="tarta de verduras">Tarta de verduras</option> 
+          </select>
+        </label>
+        <input type="submit" value="Enviar" />
+      </form>
+    )
+  }
+}
+
+
+
 
 
 
@@ -380,6 +419,10 @@ function App() {
         <div>
           <h3>Textarea</h3>
           <TextForm />
+        </div>
+        <div>
+          <h3>Select</h3>
+          <SelectForm />
         </div>
 
 
